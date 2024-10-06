@@ -1,13 +1,11 @@
-function App() {
+import NavBar from "./NavBar";
+import { Outlet } from 'react-router-dom';
+
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        
-        <h1>
-          CleanFix Services
-        </h1>
-       
-      </header>
+      <NavBar />
+      <Outlet/>
     </div>
   );
 }
