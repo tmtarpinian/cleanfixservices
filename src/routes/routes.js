@@ -5,7 +5,7 @@ import {
 import About from '../pages/About';
 import App from "../App";
 import Calculators from '../pages/Calculators';
-import Home from '../pages/Home';
+import Home from '../pages/home/Home';
 
 const router = createBrowserRouter([
   {
