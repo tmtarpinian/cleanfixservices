@@ -31,7 +31,11 @@
 
 .nav-link {
   text-decoration: none;
-  color: #FD6421;
+  color: #FFFFFF;
+  text-transform: uppercase; 
+}
+.nav-link:hover {
+    color: #FD6421;
 }
 
 /* Media query for tablet and desktop devices */

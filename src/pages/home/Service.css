@@ -12,8 +12,9 @@ h3 {
   color: #FFFFFF;
 }
 
-p {
+.service-summary {
   color: #FFFFFF;
+  height: 125px;
 }
 
 .image-wrapper {
@@ -30,9 +31,12 @@ p {
   }
 }
 
+
+
 @media (min-width: 768px) {
   .service-image {
     padding: 2px;
     max-width: 325px;
+    margin-left: 0;
   }
 }
