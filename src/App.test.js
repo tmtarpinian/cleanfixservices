@@ -1,9 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
-import Home from './pages/Home';
+import Home from './pages/home/Home';
 import About from './pages/About';
 import Calculators from './pages/Calculators';
+import Footer from './Footer'
 
 describe('App', () => {
   
@@ -29,7 +30,7 @@ describe('App', () => {
       </MemoryRouter>
     );
   
-    const homeElement = screen.getByText(/Home Page/i); // Adjust the text to match your Home component
+    const homeElement = screen.getByText(/Check Those Items/i); // Adjust the text to match your Home component
     expect(homeElement).toBeInTheDocument();
   });
 
@@ -61,5 +62,15 @@ describe('App', () => {
   
     const calculatorsElement = screen.getByText(/Calculators Page/i); // Adjust the text to match your Calculators component
     expect(calculatorsElement).toBeInTheDocument();
+  });
+
+  test('renders App with Footer', async () => {
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <App />
+      </MemoryRouter>
+    );
+    const navbar = screen.getByRole('contentinfo');
+    expect(navbar).toBeInTheDocument();
   });
 });
