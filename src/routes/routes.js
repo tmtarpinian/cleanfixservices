@@ -13,11 +13,11 @@ const router = createBrowserRouter([
     element: <App />, // Use App as the layout component
     children: [
       {
-        path: "/about",
+        path: "about",
         element: <About />,
       },
       {
-        path: "/calculators",
+        path: "calculators",
         element: <Calculators />,
       },
       {
