@@ -1,3 +1,4 @@
+@import url('./utils/colors/generated-variables.css');
 
 a {
   text-decoration: none;
@@ -21,26 +22,26 @@ a {
 
 
 .footer-container {
-  background-color: #FD6421;
+  background-color: var(--orange-shade-);
   color: black;
 }
 
 .footer-container a {
-  color: #000000; /* Black */
+  color: black;
   text-decoration: none;
 }
 
 .footer-icon:hover {
-  color: #007bff;
+  color: var(--blue-shade-6);
   transition: color 0.3s ease-in-out;
 }
 
 .footer-icon:active {
-  color: #007bff;
+  color: var(--blue-shade-6);
 }
 
 .footer-link-with-icon:hover {
-  color: #007bff;
+  color: var(--blue-shade-6);
   transition: color 0.3s ease-in-out;
 }
 

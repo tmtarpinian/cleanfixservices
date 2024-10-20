@@ -1,20 +1,17 @@
-.link {
-  text-decoration: none;
-  color: #FFFFFF;
-  text-transform: uppercase; 
-}
-.link:hover {
-    color: #000000;
-}
+@import url('../../utils/colors/generated-variables.css');
 
 h3 {
   text-transform: capitalize;
-  color: #FFFFFF;
+  color: white;
 }
 
-.service-summary {
-  color: #FFFFFF;
-  height: 125px;
+.link {
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase; 
+}
+.link:hover {
+    color: black;
 }
 
 .image-wrapper {
@@ -31,7 +28,10 @@ h3 {
   }
 }
 
-
+.service-summary {
+  color: white;
+  height: 125px;
+}
 
 @media (min-width: 768px) {
   .service-image {
