@@ -1,5 +1,6 @@
+@import url('../../utils/colors/generated-variables.css');
 .services-containter{
-  background: grey;
+  background: var(--grey-shade-8);
 }
 
 p {
@@ -17,17 +18,17 @@ p {
 }
 
 .btn-primary {
-  background-color: #2382AB;
+  background-color: var(--blue-shade-8);
   color: white;
   text-decoration: none;
 }
 
 .btn-primary:hover {
-  background-color: #1e6f91; /* Darker shade for hover */
+  background-color: var(--blue-shade-9); /* Darker shade for hover */
 }
 
 .btn-primary:active {
-  background-color: #1a5d78; /* Even darker shade for active */
+  background-color: var(--blue-shade-9); /* Even darker shade for active */
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 
@@ -48,5 +49,6 @@ p {
 
 .shaking-icon {
   animation: shake 7.5s ease-in-out infinite;
-  color: #FD6421;
+  color: var(--orange-shade-6);
 }
+

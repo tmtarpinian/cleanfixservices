@@ -8,10 +8,8 @@ const NavBar =  ()=> {
       <nav className="navbar">
           <ul className="navbar-nav list-group list-group-horizontal ml-2">
             <li className="nav-item active">
-              <Link to="/" className="nav-link">
-                <a href="/" className="navbar-brand">
+              <Link to="/" className="navbar-brand">
                   <img src={logo} alt="CleanfFix Services Fox Logo" style={{width: '10rem'}}/>
-                </a>
               </Link>
             </li>
             <li className="nav-item">

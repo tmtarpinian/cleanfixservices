@@ -1,5 +1,7 @@
+@import url('./utils/colors/generated-variables.css');
+
 .navbar {
-  background-color: #2382AB;
+  background-color: var(--blue-shade-8);
   padding: 1rem;
 }
 
@@ -31,11 +33,11 @@
 
 .nav-link {
   text-decoration: none;
-  color: #FFFFFF;
+  color: white;
   text-transform: uppercase; 
 }
 .nav-link:hover {
-    color: #FD6421;
+    color: var(--orange-shade-6);
 }
 
 /* Media query for tablet and desktop devices */
