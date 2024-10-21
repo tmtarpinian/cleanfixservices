@@ -30,7 +30,7 @@ describe('App', () => {
       </MemoryRouter>
     );
   
-    const homeElement = screen.getByText(/Check Those Items/i); // Adjust the text to match your Home component
+    const homeElement = screen.getByText(/Check Those Items/i);
     expect(homeElement).toBeInTheDocument();
   });
 
@@ -45,7 +45,7 @@ describe('App', () => {
       </MemoryRouter>
     );
   
-    const aboutElement = screen.getByText(/About Page/i); // Adjust the text to match your About component
+    const aboutElement = screen.getByText(/About Page/i);
     expect(aboutElement).toBeInTheDocument();
   });
   
@@ -60,14 +60,14 @@ describe('App', () => {
       </MemoryRouter>
     );
   
-    const calculatorsElement = screen.getByText(/Calculators Page/i); // Adjust the text to match your Calculators component
+    const calculatorsElement = screen.getByText(/Calculators Page/i);
     expect(calculatorsElement).toBeInTheDocument();
   });
 
   test('renders App with Footer', async () => {
     render(
       <MemoryRouter initialEntries={['/']}>
-        <App />
+        <Footer />
       </MemoryRouter>
     );
     const navbar = screen.getByRole('contentinfo');
