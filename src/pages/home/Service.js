@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 import './Service.css'
 import { FACEBOOK_PAGE } from '../../constants'
 
-const Service = ({service}) => {
-  const { name, summary, path, source, alt } = service
+const Service = ({ service }) => {
+  const { name, summary, source, alt } = service // TODO: add path when pages built
   return (
     <div className="col-12 col-md-6 col-lg-3 service-image">
       <div className="d-flex justify-content-center">
@@ -22,7 +22,7 @@ const Service = ({service}) => {
               {/* <Link to={path} className="link">Book Now</Link> */}
               <Link to={FACEBOOK_PAGE} className="link">Book Now</Link>
               <span>
-              <i className="fa-solid fa-arrow-right mx-1" style={{color: "#FD6421"}}></i>
+              <i className="fa-solid fa-arrow-right mx-1 book-now-arrow"></i>
               </span>
             </div>
           </div>
