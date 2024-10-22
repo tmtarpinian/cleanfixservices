@@ -5,11 +5,16 @@ on:
     branches:
       - '*'
   pull_request:
-    types:
+    branches:
+      - '*'
+    types: 
       - opened
+      - synchronize
+      - reopened
 
 jobs:
   test:
+    name: Run Tests  # This is the name of the status check reported on PRs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -18,7 +23,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
 
       - name: Install dependencies
         run: npm install

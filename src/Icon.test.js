@@ -18,7 +18,6 @@ describe('Icon', () => {
       </MemoryRouter>
     );
 
-    // const locationLink = screen.getByRole('link');
     const locationLink = screen.getByTestId('twitter-icon')
     expect(locationLink).toBeInTheDocument();
     })
