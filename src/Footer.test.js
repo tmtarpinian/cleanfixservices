@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import Footer from './Footer';
 
 describe('Footer', () => {
@@ -29,10 +29,12 @@ describe('Footer', () => {
     const facebookIcon = screen.getByTestId('facebook-icon');
     const twitterIcon = screen.getByTestId('twitter-icon');
     const instagramIcon = screen.getByTestId('instagram-icon');
+    const nextdoorIcon = screen.getByTestId('instagram-icon');
 
     expect(facebookIcon).toBeInTheDocument();
     expect(twitterIcon).toBeInTheDocument();
     expect(instagramIcon).toBeInTheDocument();
+    expect(nextdoorIcon).toBeInTheDocument();
   });
 
   test('renders company logo', () => {
