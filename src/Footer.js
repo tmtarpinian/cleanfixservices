@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import { ICONS } from './constants'
+import Icon from './Icon'
 import './Footer.css'
 import circleLogo from './assets/logo-c.png'
 const Footer = () => {
@@ -35,15 +37,38 @@ const Footer = () => {
         </div>
         <div className="col-sm mb-4 d-flex justify-content-center align-items-center">
           <div className="d-flex flex-row justify-content-center">
-            <div className="px-2">
-              <i className="fa-brands fa-facebook fa-xl footer-icon" data-testid="facebook-icon"></i>
-            </div>
-            <div className="px-2">
-              <i className="fa-brands fa-x-twitter fa-xl footer-icon" data-testid="twitter-icon"></i>
-            </div>
-            <div className="px-2">
-              <i className="fa-brands fa-instagram fa-xl footer-icon" data-testid="instagram-icon"></i>
-            </div>
+            <Icon 
+              opts = {{
+                padding: "px-2",
+                url: ICONS.FACEBOOK,
+                class: "fa-brands fa-facebook fa-xl footer-icon",
+                testId: "facebook-icon",
+              }}
+            />
+            <Icon 
+              opts = {{
+                padding: "px-2",
+                url: ICONS.TWITTER,
+                class: "fa-brands fa-x-twitter fa-xl footer-icon",
+                testId: "twitter-icon",
+              }}
+            />
+            <Icon 
+              opts = {{
+                padding: "px-2",
+                url: ICONS.INSTAGRAM,
+                class: "fa-brands fa-instagram fa-xl footer-icon fa-xl footer-icon",
+                testId: "instagram-icon",
+              }}
+            />
+            <Icon 
+              opts = {{
+                padding: "px-2",
+                url: ICONS.NEXTDOOR,
+                class: "fa-solid fa-n fa-xl footer-icon",
+                testId: "nextdoor-icon",
+              }}
+            />
           </div>
         </div>
         <div className="col-sm mb-4 d-flex justify-content-center align-items-center">
