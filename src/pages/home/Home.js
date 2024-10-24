@@ -8,7 +8,7 @@ import './Home.css'
 
 
 import checklist from '../../assets/checklist.jpg'
-import { FACEBOOK_PAGE } from "../../constants";
+import { ICONS } from "../../constants";
 
 const Home = () => {
   const services = servicesData.map(service => <Service key={service.name} service={service} />)
@@ -27,7 +27,7 @@ const Home = () => {
             <p className="homepage-title mb-0">Check those items</p>
             <p className="homepage-title mb-0">off your Todo List</p>
             <div className="d-flex justify-content-center mt-3">
-                <Link to={ FACEBOOK_PAGE } className="btn btn-lg btn-primary mb-4" role="button">Book Now</Link>
+                <Link to={ ICONS.FACEBOOK } className="btn btn-lg btn-primary mb-4" role="button">Book Now</Link>
             </div>
           </div>
           <div className="d-none d-md-block col p-0">
