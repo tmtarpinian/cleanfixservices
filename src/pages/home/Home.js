@@ -1,22 +1,17 @@
-import Service from "./Service";
-import servicesData from "./servicesData";
 import { Link } from 'react-router-dom'
 import './Home.css'
-
-
-
-
-
-import checklist from '../../assets/checklist.jpg'
 import { ICONS } from "../../constants";
+import checklist from '../../assets/checklist.jpg'
+import Service from "./Service";
+import servicesData from "./servicesData";
 
 const Home = () => {
   const services = servicesData.map(service => <Service key={service.name} service={service} />)
   return (
     <>
-      <div className="container-fluid p-0">
-        <div className="row m-0 home-banner-row">
-          <div className="col pt-4 m-md-auto">
+      <div className="d-flex justify-contents-center align-items-center">
+        <div className="row m-auto home-banner-row">
+          <div className="col pt-4 m-0 m-md-auto">
             <div className="d-flex flex-row justify-content-center align-items-center mb-0">
               fix
               <i className="fa-solid fa-2xs fa-star mx-1 shaking-icon"></i>
@@ -32,7 +27,7 @@ const Home = () => {
           </div>
           <div className="d-none d-md-block col p-0">
             {/* image size is 1066x600 */}
-            <img src={checklist} className="img-fluid" alt="an axe in a tree stump"/>
+            <img src={checklist} className="img-fluid" alt="a checklist written on a notepad"/>
           </div>
         </div>
       </div>
