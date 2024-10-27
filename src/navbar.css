@@ -2,10 +2,20 @@
 
 .navbar {
   background-color: var(--blue-shade-8);
-  padding: 1rem;
+  padding: 0;
 }
 
-.navbar-nav {
+.navbar-brand {
+  max-width: 150px;
+  padding: 0;
+}
+
+.container-fluid {
+  flex-wrap: nowrap !important;
+  padding: 0;
+}
+
+.navbar-nav{
   display: flex;
   list-style: none;
   margin: 0;
@@ -42,6 +52,20 @@
 
 /* Media query for tablet and desktop devices */
 @media (min-width: 768px) {
+
+
+  .container-fluid {
+    height: 130px;
+  }
+
+  .navbar {
+    padding: 0;
+  }
+
+  .navbar-brand {
+    max-width: 250px;
+  }
+
   .navbar-nav {
     justify-content: flex-start;
     overflow-x: visible; /* Disable horizontal scrolling */
