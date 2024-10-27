@@ -6,7 +6,7 @@ const NavBar =  ()=> {
   return(
     <header>
       <nav className="navbar">
-        <div class="container-fluid px-3">
+        <div className="container-fluid px-3">
           <Link to="/" className="navbar-brand">
               <img src={logo} alt="CleanfFix Services Logo which includes a an orange fox in blue coverals holding a wrench standing next to the title CleanFix Services" className="img-fluid"/>
           </Link>
