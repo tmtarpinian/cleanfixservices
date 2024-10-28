@@ -1,0 +1,21 @@
+h3 {
+  color: black;
+}
+
+.form-card {
+  border: none
+}
+
+.new-customer-form-label {
+  display: flex;
+  justify-content: center;
+  color: white;
+  text-transform: capitalize;
+  margin: 1rem 0;
+}
+
+@media (min-width: 768px) {
+  .form-card {
+   
+  }
+}

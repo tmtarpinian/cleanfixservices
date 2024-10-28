@@ -1,0 +1,11 @@
+h3 {
+  color: white;
+  text-transform: uppercase;
+}
+.new-customer-form-container {
+  background: var(--grey-shade-8);
+}
+
+.card {
+  background: var(--grey-shade-8);
+}
