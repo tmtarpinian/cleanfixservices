@@ -12,7 +12,7 @@ describe('Footer', () => {
 
     const locationLink = screen.getByRole('link', { name: /farmington hills, mi/i });
     const emailLink = screen.getByRole('link', { name: /info@cleanfixservices.com/i });
-    const phoneLink = screen.getByRole('link', { name: /313-626-0010/i });
+    const phoneLink = screen.getByRole('link', { name: /248-385-2881/i });
 
     expect(locationLink).toBeInTheDocument();
     expect(emailLink).toBeInTheDocument();
@@ -47,7 +47,7 @@ describe('Footer', () => {
     const logoImage = screen.getByAltText(/a fox holding a wrench representing the logo of cleanfix services/i);
 
     expect(logoImage).toBeInTheDocument();
-    expect(logoImage).toHaveAttribute('src', 'logo-c.png');
+    expect(logoImage).toHaveAttribute('src', 'black-circle-logo.webp');
   });
 
   test('renders copyright text', () => {
