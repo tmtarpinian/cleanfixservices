@@ -63,7 +63,11 @@ const Footer = () => {
               }}
             />
             <Nextdoor 
-        
+              opts = {{
+                padding: "px-2",
+                url: ICONS.NEXTDOOR,
+                testId: "nextdoor-icon",
+              }}
             />
           </div>
         </div>

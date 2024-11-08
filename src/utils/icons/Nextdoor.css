@@ -1,0 +1,11 @@
+/* Ensure the SVG icon has a consistent size and visibility */
+#nextdoor {
+  width: 25px;
+  height: 25px;
+  fill: currentColor;
+}
+
+
+#nextdoor:hover path {
+  fill: var(--blue-shade-6);
+}
