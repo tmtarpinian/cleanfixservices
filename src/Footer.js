@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ICONS } from './constants'
 import Icon from './Icon'
+import Nextdoor from './utils/icons/Nextdoor'
 import './Footer.css'
 import circleLogo from './assets/black-circle-logo.webp'
 const Footer = () => {
@@ -61,13 +62,8 @@ const Footer = () => {
                 testId: "instagram-icon",
               }}
             />
-            <Icon 
-              opts = {{
-                padding: "px-2",
-                url: ICONS.NEXTDOOR,
-                class: "fa-solid fa-n fa-xl footer-icon",
-                testId: "nextdoor-icon",
-              }}
+            <Nextdoor 
+        
             />
           </div>
         </div>
