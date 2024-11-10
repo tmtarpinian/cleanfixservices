@@ -29,7 +29,7 @@ describe('Footer', () => {
     const facebookIcon = screen.getByTestId('facebook-icon');
     const twitterIcon = screen.getByTestId('twitter-icon');
     const instagramIcon = screen.getByTestId('instagram-icon');
-    const nextdoorIcon = screen.getByTestId('instagram-icon');
+    const nextdoorIcon = screen.getByTestId('nextdoor-icon');
 
     expect(facebookIcon).toBeInTheDocument();
     expect(twitterIcon).toBeInTheDocument();
