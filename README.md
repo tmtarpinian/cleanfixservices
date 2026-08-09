@@ -52,6 +52,19 @@ ship with the site bundle), and portrait orientation looks best in the masonry g
 
 The parsing logic lives in `src/pages/portfolio/portfolioData.js`.
 
+## Calculators
+
+Each estimator is a standalone component in `src/pages/calculators/calcs/` (one file per
+calculator). The page renders whatever is in the `ACTIVE_CALCULATORS` array at the top of
+`src/pages/calculators/Calculators.js` — **swapping a calculator in or out is adding or
+removing a line there** (and its import). Array order is display order.
+
+To add a new calculator, copy an existing one in `calcs/` — they're all built from the
+shared pieces in `CalcParts.js` (`CalcCard`, `CalcResults`, `NumberField`, `Segmented`),
+so a new one is mostly just the math. Rates and assumptions (paint coverage, per-foot
+gutter rates, water cost) live as constants at the top of each calculator file for easy
+tuning.
+
 ## Design system
 
 Custom CSS, no framework (Bootstrap is being phased out). Brand tokens (colors, fonts)
