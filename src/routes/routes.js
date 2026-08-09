@@ -2,9 +2,9 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 
-import About from '../pages/About';
 import App from "../App";
 import Calculators from '../pages/Calculators';
+import Contact from '../pages/contact/Contact';
 import Home from '../pages/home/Home';
 
 const router = createBrowserRouter([
@@ -13,12 +13,12 @@ const router = createBrowserRouter([
     element: <App />, // Use App as the layout component
     children: [
       {
-        path: "about",
-        element: <About />,
-      },
-      {
         path: "calculators",
         element: <Calculators />,
+      },
+      {
+        path: "contact",
+        element: <Contact />,
       },
       {
         path: "/",
@@ -30,4 +30,3 @@ const router = createBrowserRouter([
 ]);
 
 export default router
-

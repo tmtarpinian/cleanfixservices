@@ -1,0 +1,20 @@
+.action-bar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 60;
+  display: flex;
+  gap: 0.6rem;
+  padding: 0.65rem 1rem calc(0.65rem + env(safe-area-inset-bottom));
+  background: var(--white);
+  border-top: 1px solid var(--line);
+  transform: translateY(110%);
+  transition: transform 0.25s ease;
+}
+.action-bar.visible { transform: translateY(0); }
+.action-bar .btn { flex: 1; padding: 0.8rem 1rem; font-size: 0.95rem; }
+.action-bar .btn-call {
+  background: var(--white);
+  color: var(--deep);
+  border: 1.5px solid var(--line);
+}
+@media (min-width: 768px) { .action-bar { display: none; } }
