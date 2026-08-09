@@ -1,0 +1,38 @@
+/* Design tokens — brand palette maps to the fox logo (blue coveralls / orange fox). */
+
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 700 800;
+  font-display: swap;
+  src: url('../assets/fonts/archivo.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../assets/fonts/publicsans.woff2') format('woff2');
+}
+
+:root {
+  --ink: #182730;
+  --slate: #4A626F;
+  --blue: #2382AB;
+  --deep: #123D54;
+  --deep-2: #0D2F42;
+  --orange: #FD6421;
+  --orange-press: #E0530F;
+  --mist: #EEF4F7;
+  --line: #D8E4EB;
+  --white: #FFFFFF;
+
+  /* Tints used on dark (--deep) backgrounds */
+  --sky-soft: #C6DCE8;
+  --sky-label: #9CCBE0;
+  --sky-faint: #7FA6BA;
+
+  --display: 'Archivo', 'Avenir Next', 'Helvetica Neue', sans-serif;
+  --body: 'Public Sans', 'Helvetica Neue', Arial, sans-serif;
+}

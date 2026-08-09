@@ -4,7 +4,9 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css'; // TODO: drop once Contact is redesigned
+import './styles/tokens.css';
+import './styles/base.css';
 import router from './routes/routes';
 import reportWebVitals from './reportWebVitals';
 
