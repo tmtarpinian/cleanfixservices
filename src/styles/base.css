@@ -1,0 +1,158 @@
+/* Base styles + shared primitives (buttons, sections, forms). Mobile-first. */
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 68rem; margin: 0 auto; padding: 0 1.25rem; }
+
+a { color: var(--blue); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============ Buttons ============ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 0.9rem 1.5rem;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--orange);
+  color: var(--white);
+  box-shadow: 0 2px 10px rgba(253, 100, 33, 0.35);
+}
+.btn-primary:active { background: var(--orange-press); }
+.btn-ghost-light {
+  background: transparent;
+  color: var(--white);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+}
+
+/* ============ Sections ============ */
+section { padding: 3.25rem 0; }
+
+.page-head {
+  background: var(--mist);
+  padding: 2.5rem 0;
+}
+.page-head h1 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.9rem, 7vw, 2.8rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 0.5rem;
+  text-wrap: balance;
+}
+.page-head p { color: var(--slate); max-width: 38rem; margin: 0; }
+
+.sec-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--blue);
+  margin: 0 0 0.5rem;
+}
+.sec-title {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 5.5vw, 2.3rem);
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  margin: 0 0 0.75rem;
+  text-wrap: balance;
+}
+.sec-intro { color: var(--slate); max-width: 38rem; margin: 0 0 2rem; }
+
+/* Dark call-to-action band */
+.cta-band {
+  background: linear-gradient(175deg, var(--deep) 0%, var(--deep-2) 100%);
+  color: var(--white);
+  text-align: center;
+}
+.cta-band .sec-title { color: var(--white); }
+.cta-band p { color: var(--sky-soft); margin: 0 auto 1.5rem; max-width: 32rem; }
+.cta-band .cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============ Form primitives ============ */
+.field { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.9rem; }
+.field label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--deep);
+}
+.field input, .field select, .field textarea {
+  font-family: var(--body);
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  width: 100%;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--blue);
+  outline: none;
+}
+.field .hint { font-size: 0.78rem; color: var(--slate); }
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.segmented {
+  display: flex;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.segmented label {
+  flex: 1;
+  text-align: center;
+  padding: 0.65rem 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--slate);
+  cursor: pointer;
+  background: var(--white);
+}
+.segmented input { position: absolute; opacity: 0; pointer-events: none; }
+.segmented label:has(input:checked) {
+  background: var(--deep);
+  color: var(--white);
+}
+.segmented label + label { border-left: 1.5px solid var(--line); }
