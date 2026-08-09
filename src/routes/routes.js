@@ -6,6 +6,7 @@ import App from "../App";
 import Calculators from '../pages/Calculators';
 import Contact from '../pages/contact/Contact';
 import Home from '../pages/home/Home';
+import Portfolio from '../pages/portfolio/Portfolio';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "contact",
         element: <Contact />,
+      },
+      {
+        path: "portfolio",
+        element: <Portfolio />,
       },
       {
         path: "/",
