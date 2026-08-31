@@ -10,6 +10,14 @@ npm run build    # production build in build/
 
 ## Portfolio media
 
+> **Migration in progress:** portfolio media is moving off the site bundle and into
+> Cloudflare R2 (`cleanfix-media`) with a static pagination index and infinite scroll.
+> The backend index tooling lives in `tools/media-index/` — see
+> [`tools/media-index/README.md`](tools/media-index/README.md) for the pagination
+> contract, the `media:add` / `media:status` / `media:publish` commands, and the
+> testing walkthrough. The bundle-based system below is still what the live page
+> uses until the React Query frontend hook lands.
+
 The portfolio page builds itself from the files in `src/assets/portfolio/`. There is no
 data file to edit — **adding a job = dropping a correctly named file in that folder.**
 Metadata (category, city, sort order) is parsed from the filename, and the filter chips

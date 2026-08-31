@@ -1,0 +1,21 @@
+{
+  "Electrical": [
+    "SWITCH-REPLACE",
+    "OUTLET-REPLACE",
+    "FIXTURE-REPLACE",
+    "FIXTURE-FAN-TO-FAN",
+    "FIXTURE-FAN-TO-LIGHT",
+    "FIXTURE-FAN-TO-TRACK"
+  ],
+  "Plumbing": [
+    "TOILET-TANK-REPAIR",
+    "CARTRIDGE-SHOWER"
+  ],
+  "Painting": [],
+  "Gutter Cleaning": [
+    "GUTTER-CLEAN"
+  ],
+  "General Handyman": [
+    "GENERAL-HANDYMAN"
+  ]
+}

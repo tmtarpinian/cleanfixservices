@@ -21,7 +21,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "media:add": "node tools/media-index/bin/add-asset.js",
+    "media:status": "node tools/media-index/bin/set-status.js",
+    "media:publish": "node tools/media-index/bin/publish-index.js",
+    "media:test": "node --test 'tools/media-index/test/*.test.js'"
   },
   "eslintConfig": {
     "extends": [
@@ -44,5 +48,8 @@
   "engines": {
     "node": ">=18.0.0",
     "npm": "8.11.0"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-s3": "^3.1120.0"
   }
 }
