@@ -3,13 +3,14 @@ const assert = require("node:assert/strict");
 
 const { buildIndex, cursorToken } = require("../lib/chunker");
 
-function asset(n, { date, status = "published", serviceType = "Electrical", sku = "SWITCH-REPLACE" }) {
+function asset(n, { date, status = "published", serviceType = "Electrical", sku = "SWITCH-REPLACE", city = "Ann Arbor" }) {
   return {
     serviceType,
     mediaType: "photo",
     portfolioStatus: status,
     facts: `fact ${n}`,
     date,
+    city,
     storageKey: `CleanfixMedia/${sku}/${sku}-PHOTO-${date.replaceAll("-", "")}-job-${n}.jpg`,
     portfolioUrl: null,
   };
@@ -89,6 +90,52 @@ test("per-serviceType feeds contain only their own items", () => {
   assert.equal(latest.feeds.byServiceType.Plumbing.count, 1);
   const plumbingFirst = objects.find((o) => o.relKey === latest.feeds.byServiceType.Plumbing.firstPage);
   assert.deepEqual(plumbingFirst.body.items.map((i) => i.serviceType), ["Plumbing"]);
+});
+
+test("per-city feeds live under city/ and carry only their own items", () => {
+  const { latest, objects } = buildIndex(
+    [
+      asset(1, { date: "2026-08-01", city: "Ann Arbor" }),
+      asset(2, { date: "2026-08-02", city: "St. Clair Shores" }),
+      asset(3, { date: "2026-08-03", city: "Ann Arbor" }),
+    ],
+    { ...OPTS, pageSize: 10 }
+  );
+  assert.equal(latest.feeds.byCity["Ann Arbor"].count, 2);
+  assert.equal(latest.feeds.byCity["St. Clair Shores"].count, 1);
+  assert.equal(latest.feeds.byCity["Ann Arbor"].firstPage, `${OPTS.version}/city/ann-arbor/first.json`);
+  assert.equal(
+    latest.feeds.byCity["St. Clair Shores"].firstPage,
+    `${OPTS.version}/city/st-clair-shores/first.json`
+  );
+  const annArbor = objects.find((o) => o.relKey === latest.feeds.byCity["Ann Arbor"].firstPage);
+  assert.deepEqual(annArbor.body.items.map((i) => i.city), ["Ann Arbor", "Ann Arbor"]);
+});
+
+test("legacy null-city items appear in all/serviceType feeds but join no city feed", () => {
+  const { latest, objects } = buildIndex(
+    [asset(1, { date: "2026-08-01", city: null }), asset(2, { date: "2026-08-02", city: "Ann Arbor" })],
+    { ...OPTS, pageSize: 10 }
+  );
+  assert.equal(latest.feeds.all.count, 2);
+  assert.equal(latest.feeds.byServiceType.Electrical.count, 2);
+  assert.deepEqual(Object.keys(latest.feeds.byCity), ["Ann Arbor"]);
+  const first = objects.find((o) => o.relKey === latest.feeds.all.firstPage);
+  assert.deepEqual(first.body.items.map((i) => i.city), ["Ann Arbor", null]);
+});
+
+test("two city spellings colliding on one slug refuse to publish", () => {
+  assert.throws(
+    () =>
+      buildIndex(
+        [
+          asset(1, { date: "2026-08-01", city: "St. Louis" }),
+          asset(2, { date: "2026-08-02", city: "St Louis" }),
+        ],
+        OPTS
+      ),
+    /feed slug collision/
+  );
 });
 
 test("empty published set still emits a valid empty first page", () => {

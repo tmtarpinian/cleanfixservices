@@ -3,6 +3,10 @@ const path = require("node:path");
 
 const MEDIA_TYPES = ["photo", "video", "timelapse"];
 const PORTFOLIO_STATUSES = ["draft", "published", "archived"];
+// Letters plus the punctuation real US city names use (St. Clair Shores,
+// O'Fallon, Winston-Salem). No digits: a zip or state abbreviation in the
+// city field would fragment the byCity feeds.
+const CITY_RE = /^[A-Za-z][A-Za-z .'-]*[A-Za-z.]$/;
 const KEY_EXTENSIONS = ["jpg", "jpeg", "png", "webp", "gif", "mp4", "mov", "webm"];
 const REQUIRED_FIELDS = ["serviceType", "mediaType", "portfolioStatus", "facts", "date", "storageKey"];
 
@@ -68,6 +72,22 @@ validator("date", (asset) =>
     : [`date "${asset.date}" must be a real calendar date in YYYY-MM-DD form`]
 );
 
+// city is required on all new adds (media:add enforces it), but entries that
+// predate the field carry null and stay publishable — they appear with
+// city: null and simply don't join any byCity feed.
+validator("city", (asset) => {
+  if (asset.city == null) return [];
+  if (typeof asset.city !== "string" || asset.city.trim().length === 0) {
+    return ["city must be a non-empty string (or null on legacy entries)"];
+  }
+  if (asset.city !== asset.city.trim().replace(/\s+/g, " ")) {
+    return [`city "${asset.city}" must be trimmed with single spaces between words`];
+  }
+  return CITY_RE.test(asset.city)
+    ? []
+    : [`city "${asset.city}" may only contain letters, spaces, periods, apostrophes, and hyphens`];
+});
+
 validator("facts", (asset) =>
   typeof asset.facts === "string" && asset.facts.trim().length > 0
     ? []
@@ -123,6 +143,7 @@ module.exports = {
   MEDIA_TYPES,
   PORTFOLIO_STATUSES,
   KEY_EXTENSIONS,
+  CITY_RE,
   STORAGE_KEY_RE,
   loadCategoryMap,
   skuToServiceType,

@@ -16,6 +16,7 @@ function validAsset(overrides = {}) {
     portfolioStatus: "published",
     facts: "Replaced a failing 3-way switch pair controlling the stair lights.",
     date: "2026-08-14",
+    city: "Ann Arbor",
     storageKey: "CleanfixMedia/SWITCH-REPLACE/SWITCH-REPLACE-PHOTO-20260814-stair-3way.jpg",
     portfolioUrl: null,
     ...overrides,
@@ -102,4 +103,23 @@ test("published asset may have null portfolioUrl, and https when set", () => {
 test("empty facts rejected", () => {
   const errors = validateAsset(validAsset({ facts: "   " }), CATEGORY_MAP);
   assert.ok(errors.some((e) => e.includes("[facts]")));
+});
+
+test("legacy entries without a city still validate", () => {
+  assert.deepEqual(validateAsset(validAsset({ city: null }), CATEGORY_MAP), []);
+  const { city, ...withoutCity } = validAsset();
+  assert.deepEqual(validateAsset(withoutCity, CATEGORY_MAP), []);
+});
+
+test("city punctuation real names use is accepted", () => {
+  for (const city of ["St. Clair Shores", "O'Fallon", "Winston-Salem"]) {
+    assert.deepEqual(validateAsset(validAsset({ city }), CATEGORY_MAP), [], city);
+  }
+});
+
+test("empty, untrimmed, or non-letter city rejected", () => {
+  for (const city of ["", "   ", " Ann Arbor", "Ann  Arbor", "Ann Arbor MI 48103", "48103"]) {
+    const errors = validateAsset(validAsset({ city }), CATEGORY_MAP);
+    assert.ok(errors.some((e) => e.includes("[city]")), `"${city}" must be rejected`);
+  }
 });

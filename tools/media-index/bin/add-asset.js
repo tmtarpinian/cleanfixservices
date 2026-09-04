@@ -20,7 +20,7 @@ const MEDIA_CONTENT_TYPES = {
 };
 
 const USAGE = `Usage: npm run media:add -- --sku SWITCH-REPLACE --media-type photo --date 2026-08-28 \\
-  --desc kitchen-3way --facts "..." [--status draft|published|archived] \\
+  --desc kitchen-3way --city "Ann Arbor" --facts "..." [--status draft|published|archived] \\
   [--portfolio-url https://...] [--upload path/to/file.jpg] [--ext jpg]
 
 Derives the storageKey (CleanfixMedia/[SKU]/[SKU]-[MEDIATYPE]-[YYYYMMDD]-[SHORTDESC].ext),
@@ -35,6 +35,7 @@ async function main() {
       "media-type": { type: "string" },
       date: { type: "string" },
       desc: { type: "string" },
+      city: { type: "string" },
       facts: { type: "string" },
       status: { type: "string", default: "draft" },
       "portfolio-url": { type: "string" },
@@ -44,7 +45,7 @@ async function main() {
     },
   });
 
-  if (args.help || !args.sku || !args["media-type"] || !args.date || !args.desc || !args.facts) {
+  if (args.help || !args.sku || !args["media-type"] || !args.date || !args.desc || !args.city || !args.facts) {
     console.log(USAGE);
     process.exit(args.help ? 0 : 1);
   }
@@ -72,6 +73,7 @@ async function main() {
     portfolioStatus: args.status,
     facts: args.facts,
     date: args.date,
+    city: args.city.trim().replace(/\s+/g, " "),
     storageKey,
     portfolioUrl: args["portfolio-url"] ?? null,
   };

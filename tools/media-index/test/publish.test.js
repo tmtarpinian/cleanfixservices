@@ -16,6 +16,7 @@ function asset(n, date, status = "published") {
     portfolioStatus: status,
     facts: `fact ${n}`,
     date,
+    city: "Ann Arbor",
     storageKey: `CleanfixMedia/SWITCH-REPLACE/SWITCH-REPLACE-PHOTO-${date.replaceAll("-", "")}-job-${n}.jpg`,
     portfolioUrl: null,
   };

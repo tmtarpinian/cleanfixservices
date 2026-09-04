@@ -7,7 +7,7 @@ const crypto = require("node:crypto");
 const DEFAULT_PAGE_SIZE = 24;
 
 function feedSlug(name) {
-  return name.toLowerCase().replace(/\s+/g, "-");
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
 // Keyset cursor: last-seen sort key (compact date) + tiebreaker (hash of the
@@ -33,6 +33,7 @@ function toPublicItem(asset, publicBaseUrl) {
     serviceType: asset.serviceType,
     mediaType: asset.mediaType,
     date: asset.date,
+    city: asset.city ?? null,
     facts: asset.facts,
     portfolioUrl: asset.portfolioUrl ?? null,
     storageKey: asset.storageKey,
@@ -59,25 +60,49 @@ function buildFeed(items, { version, slug, pageSize }) {
   return { firstPage, count: items.length, objects };
 }
 
+function groupBy(items, keyOf) {
+  const groups = new Map();
+  for (const item of items) {
+    const name = keyOf(item);
+    if (name == null) continue;
+    if (!groups.has(name)) groups.set(name, []);
+    groups.get(name).push(item);
+  }
+  return groups;
+}
+
 function buildIndex(assets, { version, pageSize = DEFAULT_PAGE_SIZE, publicBaseUrl = null, generatedAt }) {
   const published = sortPublished(assets).map((a) => toPublicItem(a, publicBaseUrl));
 
-  const feeds = new Map([["all", published]]);
-  for (const item of published) {
-    if (!feeds.has(item.serviceType)) feeds.set(item.serviceType, []);
-    feeds.get(item.serviceType).push(item);
-  }
-
   const objects = [];
-  const feedsMeta = {};
-  for (const [name, items] of feeds) {
-    const feed = buildFeed(items, { version, slug: feedSlug(name), pageSize });
-    objects.push(...feed.objects);
-    feedsMeta[name] = { firstPage: feed.firstPage, count: feed.count };
-  }
+  const emitFeeds = (groups, slugPrefix = "") => {
+    const meta = {};
+    const slugs = new Map();
+    for (const [name, items] of groups) {
+      const slug = slugPrefix + feedSlug(name);
+      // Two distinct names on one chunk path ("St. Louis" vs "St Louis")
+      // would silently overwrite each other's pages — almost always a typo.
+      if (slugs.has(slug)) {
+        throw new Error(
+          `feed slug collision: "${name}" and "${slugs.get(slug)}" both map to "${slug}" — fix the spelling in master.json`
+        );
+      }
+      slugs.set(slug, name);
+      const feed = buildFeed(items, { version, slug, pageSize });
+      objects.push(...feed.objects);
+      meta[name] = { firstPage: feed.firstPage, count: feed.count };
+    }
+    return meta;
+  };
 
-  const { all, ...byServiceType } = feedsMeta;
-  const latest = { version, generatedAt, pageSize, feeds: { all, byServiceType } };
+  const { all } = emitFeeds(new Map([["all", published]]));
+  const byServiceType = emitFeeds(groupBy(published, (i) => i.serviceType));
+  // City chunks live under <version>/city/<slug>/ so a city name can never
+  // collide with a serviceType feed path. Legacy items with city: null appear
+  // only in the all + serviceType feeds.
+  const byCity = emitFeeds(groupBy(published, (i) => i.city), "city/");
+
+  const latest = { version, generatedAt, pageSize, feeds: { all, byServiceType, byCity } };
   return { latest, objects };
 }
 
