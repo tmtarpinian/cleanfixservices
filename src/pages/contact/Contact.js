@@ -60,7 +60,7 @@ const Contact = () => {
                   <option value="email">Email</option>
                 </select>
               </div>
-              {communicationPreference == 'email' ?
+              {communicationPreference === 'email' ?
                 <div className="form-group">
                   <label for="inputEmail" className="new-customer-form-label">Please Enter Your Email</label>
                   <input type="email" className="form-control col-md-4" required id="inputEmail" aria-describedby="newCustomerEmail" placeholder="sample@sample.com" />

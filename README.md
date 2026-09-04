@@ -10,55 +10,40 @@ npm run build    # production build in build/
 
 ## Portfolio media
 
-> **Migration in progress:** portfolio media is moving off the site bundle and into
-> Cloudflare R2 (`cleanfix-media`) with a static pagination index and infinite scroll.
-> The backend index tooling lives in `tools/media-index/` — see
-> [`tools/media-index/README.md`](tools/media-index/README.md) for the pagination
-> contract, the `media:add` / `media:status` / `media:publish` commands, and the
-> testing walkthrough. The bundle-based system below is still what the live page
-> uses until the React Query frontend hook lands.
+Portfolio media lives in Cloudflare R2 (`cleanfix-media`), not the site bundle. The
+page streams it through a **static pagination index**: pre-chunked, immutable JSON
+snapshots published to `CleanfixMedia/_index/`, so the browser never lists the bucket
+and only on-screen assets fetch bytes. Full contract, CLI commands, and testing
+walkthrough: [`tools/media-index/README.md`](tools/media-index/README.md).
 
-The portfolio page builds itself from the files in `src/assets/portfolio/`. There is no
-data file to edit — **adding a job = dropping a correctly named file in that folder.**
-Metadata (category, city, sort order) is parsed from the filename, and the filter chips
-are generated from whatever categories exist.
+**Adding a job** happens on the machine that owns `tools/media-index/data/master.json`
+(gitignored — the repo and bucket are public, drafts are not):
 
-### Filename convention
-
-```
-<category>--<city-slug>--<date>.<ext>
+```bash
+npm run media:add -- --sku SWITCH-REPLACE --media-type photo --date 2026-08-28 \
+  --desc kitchen-3way --city "Ann Arbor" --facts "..." --upload path.jpg --status published
+npm run media:publish        # writes a new index snapshot, flips latest.json
 ```
 
-- **`category`** — lowercase, one word shown on the filter chip: `painting`, `plumbing`,
-  `electrical`, `landscaping`. New categories work automatically and get their own chip.
-- **`city-slug`** — lowercase, hyphens for spaces: `farmington-hills` → displays as
-  "Farmington Hills".
-- **`date`** — `YYYY-MM-DD` job date. Tiles are sorted newest-first by this value. If two
-  jobs share category/city/date, add a suffix: `2026-08-01a`, `2026-08-01b`.
-- The two-hyphen separator `--` is required between the three parts.
+The site picks up a publish within ~60s (`latest.json` cache) — no rebuild or deploy.
 
-### Photos vs. videos
+**Frontend** (`src/pages/portfolio/`), one file per concern:
 
-- **Photo**: one file — `.jpg`, `.jpeg`, `.png`, or `.webp`.
-- **Video**: two files with the **same basename** — the video (`.mp4` or `.webm`) plus a
-  poster image (`.jpg` etc.) used for the grid tile and the frame shown before playback.
-  Video tiles automatically get a play badge, and the lightbox plays them with controls.
+- `mediaIndexClient.js` — pure fetch functions for the index contract; `INDEX_BASE`
+  comes from `REACT_APP_MEDIA_INDEX_BASE` (defaults to the public r2.dev host).
+- `usePortfolioFeed.js` — React Query: a manifest query (60s stale time, matching the
+  `latest.json` edge cache) plus `useInfiniteQuery` per feed, keyed by snapshot
+  version so chunks cache forever and filter switches restore instantly.
+- `useInView.js` — shared IntersectionObserver hook.
+- `MediaTile.js` — tiles render a placeholder until they scroll near the viewport;
+  only then does the media src hit R2 (videos load metadata only until played).
+- `Portfolio.js` — filter chips from the manifest's `byServiceType` feeds, a city
+  dropdown from `byCity`, and text search (city/serviceType/facts). Chips and the
+  dropdown each select a server feed; search and combined filters narrow client-side,
+  paging the feed eagerly to the end so results are complete. Infinite-scroll
+  sentinel, lightbox.
 
-### Example file tree
-
-```
-src/assets/portfolio/
-├── painting--farmington-hills--2026-06-01.jpg     # photo
-├── plumbing--northville--2026-07-15.jpg           # photo
-├── landscaping--novi--2026-08-09.mp4              # video
-├── landscaping--novi--2026-08-09.jpg              # └─ its poster frame (same basename)
-└── electrical--livonia--2026-08-20.webp           # photo
-```
-
-Practical tips: keep photos ≲1600px on the long edge and videos short/compressed (they
-ship with the site bundle), and portrait orientation looks best in the masonry grid.
-
-The parsing logic lives in `src/pages/portfolio/portfolioData.js`.
+Tests: `Portfolio.test.js` (mocked fetch + IntersectionObserver) — `npm test`.
 
 ## Calculators
 

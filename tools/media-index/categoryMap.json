@@ -9,13 +9,32 @@
   ],
   "Plumbing": [
     "TOILET-TANK-REPAIR",
-    "CARTRIDGE-SHOWER"
+    "TOILET-REPLACE",
+    "CARTRIDGE-SHOWER",
+    "SINK-FAUCET-REPLACE",
+    "GARBAGE-DISPOSAL-REPLACE",
+    "VANITY-REPLACE"
   ],
-  "Painting": [],
+  "Painting": [
+    "INTERIOR-PAINT",
+    "EXTERIOR-PAINT"
+  ],
   "Gutter Cleaning": [
-    "GUTTER-CLEAN"
+    "GUTTER-CLEAN",
+    "DOWN-SPOUT-REPAIR"
   ],
   "General Handyman": [
-    "GENERAL-HANDYMAN"
+    "MAILBOX-REPAIR",
+    "CABINET-REPAIR",
+    "LANDSCAPING",
+    "SMALL-ENGINE-REPAIR",
+    "HANDRAIL-REPAIR",
+    "WINDOW-BLIND-REPLACE",
+    "TV-MOUNT",
+    "DOOR-LOCK-REPLACE"
+  ],
+    "Furniture Repair": [
+    "REUPHOLSTERY",
+    "CHAIR-REPAIR"
   ]
 }
