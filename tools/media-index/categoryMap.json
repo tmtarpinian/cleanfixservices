@@ -1,0 +1,40 @@
+{
+  "Electrical": [
+    "SWITCH-REPLACE",
+    "OUTLET-REPLACE",
+    "FIXTURE-REPLACE",
+    "FIXTURE-FAN-TO-FAN",
+    "FIXTURE-FAN-TO-LIGHT",
+    "FIXTURE-FAN-TO-TRACK"
+  ],
+  "Plumbing": [
+    "TOILET-TANK-REPAIR",
+    "TOILET-REPLACE",
+    "CARTRIDGE-SHOWER",
+    "SINK-FAUCET-REPLACE",
+    "GARBAGE-DISPOSAL-REPLACE",
+    "VANITY-REPLACE"
+  ],
+  "Painting": [
+    "INTERIOR-PAINT",
+    "EXTERIOR-PAINT"
+  ],
+  "Gutter Cleaning": [
+    "GUTTER-CLEAN",
+    "DOWN-SPOUT-REPAIR"
+  ],
+  "General Handyman": [
+    "MAILBOX-REPAIR",
+    "CABINET-REPAIR",
+    "LANDSCAPING",
+    "SMALL-ENGINE-REPAIR",
+    "HANDRAIL-REPAIR",
+    "WINDOW-BLIND-REPLACE",
+    "TV-MOUNT",
+    "DOOR-LOCK-REPLACE"
+  ],
+    "Furniture Repair": [
+    "REUPHOLSTERY",
+    "CHAIR-REPAIR"
+  ]
+}
